@@ -1,0 +1,26 @@
+<form [formGroup]="dynamicForm">
+    <div *ngFor="let formFieldItem of formFieldsStructure let formFieldItemIndex = index">
+
+        <mat-form-field appearance="outline" *ngIf="formFieldItem.type == 'numeric-text'">
+            <mat-label>{{formFieldItem.label}}</mat-label>
+            <input matInput [placeholder]="formFieldItem.placeholder" [formControlName]="formFieldItem.name" autocomplete="nope">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" *ngIf="formFieldItem.type == 'select-dropdown'">
+            <mat-label>{{formFieldItem.label}}</mat-label>
+            <mat-select [formControlName]="formFieldItem.name" [placeholder]="formFieldItem.placeholder">
+                <mat-option *ngFor="let option of formFieldItem.options"
+                    [value]="option.value">{{option.label}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" *ngIf="formFieldItem.type == 'text'">
+            <mat-label>{{formFieldItem.label}}</mat-label>
+            <input matInput [placeholder]="formFieldItem.placeholder" [formControlName]="formFieldItem.name"
+                autocomplete="nope">
+        </mat-form-field>
+
+    </div>
+
+    <button mat-raised-button color="accent" type="submit" class="submit">Continue</button>
+</form>
